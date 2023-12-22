@@ -26,14 +26,9 @@ public class MyBattleship implements Battleship{
     char[][] myMap;
     char[][] opponentMap;
 
-    int myHitShip;
-    int opponentHitShip;
-
     MyBattleship(BattleshipGenerator battleshipGenerator){
         myMap = convertTo2DCharArray(battleshipGenerator.generateMyMap());
         opponentMap = convertTo2DCharArray(battleshipGenerator.generateOpponentMap());
-        myHitShip = 0;
-        opponentHitShip = 0;
     }
 
     private char[][] convertTo2DCharArray(String input) {
@@ -48,8 +43,8 @@ public class MyBattleship implements Battleship{
 
     @Override
     public String attackMe(String coordinate){
-        int row = 'A' - coordinate.charAt(0);
-        int column = '1' - coordinate.charAt(1);
+        int row = coordinate.charAt(0) - 'A';
+        int column = coordinate.charAt(1) - '0';
 
         if(myMap[row][column] == '.'){// miss ship
             myMap[row][column] = '~';
@@ -81,8 +76,8 @@ public class MyBattleship implements Battleship{
 
     @Override
     public void attackOpponent(String coordinate, String command){
-        int row = 'A' - coordinate.charAt(0);
-        int column = '1' - coordinate.charAt(1);
+        int row = coordinate.charAt(0) - 'A';
+        int column = coordinate.charAt(1) - '0';
 
         if(command.equals("pudło"))
             opponentMap[row][column] = '.';
@@ -92,6 +87,7 @@ public class MyBattleship implements Battleship{
         }
 
         if(command.equals("trafiony zatopiony")){// unlock box around hit ship
+            opponentMap[row][column] = '#';
             ArrayList<int[]> shipCoordinate = getShipCoordinate(opponentMap, row, column);
             for(int[] coor : shipCoordinate){
                 for (int i = coor[0] - 1; i <= coor[0] + 1; i++) {
