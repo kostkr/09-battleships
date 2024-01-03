@@ -19,13 +19,14 @@ public class StartBattleship {
             System.exit(1);
         }
 
-        if(mode.equals("serwer")){
+        if(mode.equals("server")){
             if(port == null){
                 System.err.println("please choose -port");
                 System.exit(2);
             }
             startSerwer(Integer.parseInt(port));
         }
+
         if(mode.equals("client")){
             if(port == null){
                 System.err.println("please choose -port");
