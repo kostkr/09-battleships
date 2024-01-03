@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * my map
@@ -75,7 +76,7 @@ public class MyBattleship implements Battleship{
     }
 
     @Override
-    public void attackOpponent(String coordinate, String command){
+    public void attackOpponent(String command, String coordinate){
         int row = coordinate.charAt(0) - 'A';
         int column = coordinate.charAt(1) - '0';
 
@@ -99,6 +100,39 @@ public class MyBattleship implements Battleship{
                 }
             }
         }
+    }
+
+    @Override
+    public void showMaps() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("My map        Opponent map\n");
+        sb.append("  0123456789\n");
+        for(int i = 0; i < myMap.length; ++i){
+            switch (i) {
+                case 0 -> sb.append("A ");
+                case 1 -> sb.append("B ");
+                case 2 -> sb.append("C ");
+                case 3 -> sb.append("D ");
+                case 4 -> sb.append("E ");
+                case 5 -> sb.append("F ");
+                case 6 -> sb.append("G ");
+                case 7 -> sb.append("H ");
+                case 8 -> sb.append("I ");
+                case 9 -> sb.append("J ");
+                default -> sb.append("? ");
+            }
+
+            for(int j = 0; j < myMap[i].length; ++j){
+                sb.append(myMap[i][j]);
+            }
+            sb.append("    ");
+            for(int j = 0; j < opponentMap[i].length; ++j){
+                sb.append(opponentMap[i][j]);
+            }
+            sb.append("\n");
+        }
+
+        System.out.println(sb);
     }
 
     private boolean MyShipIsDestroyed(int row, int column){
